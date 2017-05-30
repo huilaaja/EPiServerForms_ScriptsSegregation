@@ -11,7 +11,9 @@
 %>
 
 <% using(Html.BeginElement(Model, new { @class="FormParagraphText Form__Element--NonData", @data_f_element_nondata="" })) { %>
-    <% if (EPiServer.Editor.PageEditing.PageIsInEditMode)
+    <%--/* ************** CUSTOMIZATION START *************** */--%>
+    <div name="<%: formElement.ElementName %>" id="<%: formElement.Guid %>" <%: Html.Raw(Model.AttributesString) %>><%: Html.Raw(Model.EditViewFriendlyTitle) %></div>
+    <%--<% if (EPiServer.Editor.PageEditing.PageIsInEditMode)
     { %>
         <div name="<%: formElement.ElementName %>" id="<%: formElement.Guid %>" <%: Html.Raw(Model.AttributesString) %>><%: Html.Raw(Model.EditViewFriendlyTitle) %></div>
     <% }
@@ -70,5 +72,6 @@
                 });
             }
         </script>
-    <% } %>
+    <% } %>--%>
+    <%--/* **************  CUSTOMIZATION END *************** */--%>
 <% } %>
