@@ -5,9 +5,11 @@ Segregation of Episerver Forms and javascripts. Some client frameworks (example 
 These changes will move the javascripts in footer and those will be loaded at the end of the document.
 Those will be rendered with following command: @Html.RequiredClientResources("Footer")
 
-## Installation
+### Installation
 
 Install Episerver Forms and just copy the folder (/Views/Shared/ElementBlocks) to your Episerver project.
+
+### Requirements and changes
 
 Requires Episerver Forms 4.5.1
 
