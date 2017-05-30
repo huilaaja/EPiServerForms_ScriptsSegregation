@@ -5,10 +5,15 @@
 <%@ Import Namespace="EPiServer.Forms.Helpers.Internal" %>
 <%@ Import Namespace="EPiServer.Forms.EditView.Internal" %>
 <%@ Import Namespace="EPiServer.Forms.Implementation.Elements" %>
+<%@ Import Namespace="EPiServer.Framework.Web.Resources" %>
 <%@ Control Language="C#" Inherits="ViewUserControl<FormContainerBlock>" %>
-
+<%@ Import Namespace="EPiServer.ServiceLocation" %>
 <%  
-    var _formConfig = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Forms.Configuration.IEPiServerFormsImplementationConfig>();
+    /* **************  CUSTOMIZATION START *************** */
+    var formConfig = ServiceLocator.Current.GetInstance<EPiServer.Forms.Configuration.IEPiServerFormsImplementationConfig>();
+    var clientResources = ServiceLocator.Current.GetInstance<IRequiredClientResourceList>();
+    clientResources.RequireScript( formConfig.CoreController + "/GetFormInitScript?formGuid=" + Model.Form.FormGuid + "&formLanguage=" + FormsExtensions.GetCurrentPageLanguage(), "FormScript"+ Model.Form.FormGuid, new List<string>()).AtFooter();
+    /* **************  CUSTOMIZATION END *************** */
 %>
 
 
@@ -49,7 +54,9 @@
     <%} %>
 
     <%--Meta data, authoring data of this form is transfer to clientside here. We need to take form with language coresponse with current page's language --%>
-    <script type="text/javascript" src="<%: _formConfig.CoreController %>/GetFormInitScript?formGuid=<%: Model.Form.FormGuid %>&formLanguage=<%: FormsExtensions.GetCurrentPageLanguage() %>"></script>
+    <%--/* **************  CUSTOMIZATION START *************** */--%>
+    <%--<script type="text/javascript" src="<%: _formConfig.CoreController %>/GetFormInitScript?formGuid=<%: Model.Form.FormGuid %>&formLanguage=<%: FormsExtensions.GetCurrentPageLanguage() %>"></script>--%>
+    <%--/* **************  CUSTOMIZATION END *************** */--%>
 
     <%--Meta data, send along as a SYSTEM information about this form, so this can work without JS --%>
     <input type="hidden" class="Form__Element Form__SystemElement FormHidden FormHideInSummarized" name="__FormGuid" value="<%: Model.Form.FormGuid %>" data-f-type="hidden" />
